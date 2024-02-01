@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Data
@@ -20,6 +21,10 @@ public class ProjectDto {
 
     @NonNull
     @JsonProperty(namespace = "created_at")
-    private Instant createdAt;
+    private Timestamp createdAt;
+
+
+    @JsonProperty(namespace = "updated_at")
+    private Timestamp updatedAt;
 
 }

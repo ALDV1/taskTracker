@@ -3,7 +3,8 @@ package org.example.taskTracker.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,8 @@ public class ProjectEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator="project_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="project_seq",sequenceName="project_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "name", unique = true)
@@ -26,7 +28,11 @@ public class ProjectEntity {
 
     @Builder.Default
     @Column(name = "created_at")
-    private Instant createdAt = Instant.now();
+    private Timestamp createdAt = Timestamp.valueOf(LocalDateTime.now());
+
+    @Builder.Default
+    @Column
+    private Timestamp updatedAt = Timestamp.valueOf(LocalDateTime.now());
 
     @Builder.Default
     @Column(name = "task_state")
